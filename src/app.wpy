@@ -3,20 +3,30 @@
   @import './style/base/fonts/iconfont.less';
 </style>
 
-<script>
+<script lang="typescript">
 import wepy from 'wepy'
 import 'wepy-async-function'
 
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/index'
+      'pages/index',
+      'pages/personal'
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
-      navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'black'
+    },
+    tabBar: {
+      list: [{
+        pagePath: 'pages/index',
+        text: '首页'
+      }, {
+        pagePath: 'pages/personal',
+        text: '我的'
+      }],
+      selectedColor: '#1d4582'
     }
   }
 

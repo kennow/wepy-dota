@@ -2,23 +2,17 @@
 </style>
 
 <template>
-  <view class="weui-cells weui-cells_after-title">
-      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-        <view class="weui-cell__hd">
-          <text class="iconfont icon-money"/>
-        </view>
-        <view class="weui-cell__bd">余额</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">99元</view>
-      </navigator>
-      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
-        <view class="weui-cell__hd">
-          <text class="iconfont icon-youhuiquan"/>
-        </view>
-        <view class="weui-cell__bd">优惠劵</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">2张</view>
-      </navigator>
-    </view>
+  <view>
+    首页
+  </view>
 </template>
 
-<script>
+<script lang="typescript">
+import wepy from 'wepy'
+
+export default class Index extends wepy.page {
+  config= {
+    navigationBarTitleText: '首页'
+  }
+}
 </script>

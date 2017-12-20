@@ -25,6 +25,8 @@ module.exports = {
     sass: {
       outputStyle: 'compressed'
     },
+    typescript: {
+    },
     babel: {
       sourceMap: true,
       presets: [
