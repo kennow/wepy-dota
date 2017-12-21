@@ -1,0 +1,106 @@
+<style lang="scss">
+  .video-list{
+    box-sizing: border-box;
+    padding-top: 300rpx;
+    overflow-y: auto;
+    .scroll-view{
+      height: 100%;
+    }
+  }
+</style>
+
+<template>
+  <view class="video-list">
+    <view class='scroll-view'>
+      <view class="weui-loadmore" hidden="{{!isRefresh}}">
+        <view class="weui-loading"></view>
+      </view>
+      <repeat for="{{videoList}}" key="index" index="index" item="item">
+        <view class="weui-panel weui-panel_access">
+          <view class="weui-panel__bd">
+            <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                    <image class="weui-media-box__thumb" src="{{icon60}}" />
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                    <view class="weui-media-box__title">{{item.name}}</view>
+                    <view class="weui-media-box__info">
+                      <view class="weui-media-box__info__meta">文字来源</view>
+                      <view class="weui-media-box__info__meta">时间</view>
+                      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+                    </view>
+                </view>
+            </navigator>
+          </view>
+        </view>
+      </repeat>
+      <view class="weui-loadmore" hidden="{{!isLoad}}">
+        <view class="weui-loading"></view>
+        <view class="weui-loadmore__tips">正在加载</view>
+      </view>
+      <!-- <view class="weui-loadmore weui-loadmore_line" hidden="{{!isLowed}}">
+        <view class="weui-loadmore__tips weui-loadmore__tips_in-line">到底啦</view>
+      </view> -->
+    </view>
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+
+export default class VideoList extends wepy.component {
+  data = {
+    videoList: [
+      { name: '1' },
+      { name: '2' },
+      { name: '3' },
+      { name: '4' },
+      { name: '4' },
+      { name: '4' },
+      { name: '4' },
+      { name: '4' },
+      { name: '4' },
+      { name: '4' },
+      { name: '4' },
+      { name: '4' },
+      { name: '4' },
+      { name: '4' }
+    ],
+    isRefresh: false,
+    isLoad: false,
+    timer: null
+  };
+
+  components = {};
+
+  methods = {
+  };
+
+  getDoctorList() {
+    this.isRefresh = false
+    this.isLoad = false
+    this.$apply()
+  }
+
+  events = {
+    upper() {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      this.isRefresh = true
+      this.timer = setTimeout(() => {
+        this.getDoctorList()
+      }, 1000)
+    },
+    lower() {
+      if (this.timer) {
+        clearTimeout(this.timer)
+      }
+      this.isLoad = true
+      this.timer = setTimeout(() => {
+        this.getDoctorList()
+      }, 1000)
+    }
+  };
+}
+</script>

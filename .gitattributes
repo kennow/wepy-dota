@@ -1,0 +1,3 @@
+*.wpy linguist-language=TypeScript
+*.wpy linguist-language=scss
+*.wpy linguist-language=wpy

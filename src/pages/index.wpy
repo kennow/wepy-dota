@@ -3,16 +3,34 @@
 
 <template>
   <view>
-    首页
+    <swiperHeader />
+    <videoList />
   </view>
 </template>
 
 <script lang="typescript">
 import wepy from 'wepy'
+import SwiperHeader from '../components/swiper-header'
+import VideoList from '../components/video-list'
 
 export default class Index extends wepy.page {
   config= {
-    navigationBarTitleText: '首页'
+    navigationBarTitleText: '首页',
+    enablePullDownRefresh: true
+  }
+
+  components = {
+    swiperHeader: SwiperHeader,
+    videoList: VideoList
+  }
+
+  onPullDownRefresh() {
+    this.$broadcast('upper', '')
+    wepy.stopPullDownRefresh()
+  }
+
+  onReachBottom() {
+    this.$broadcast('lower', '')
   }
 }
 </script>
