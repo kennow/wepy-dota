@@ -1,5 +1,5 @@
 # wepy-dota
-wepy 写的dota 09 对战平台的小程序。希望酒神可以允许，可以观看视频，可以跟09平台数据连上，可以看自己的战绩，购买皮肤等等。
+wepy 写的dota 09 对战平台的小程序。希望酒神可以看到哈哈，可以观看视频，可以看自己的战绩，购买皮肤，充值。
 
 run
   wepy build --watch
@@ -17,4 +17,8 @@ icon: iconfont
 css: scss
 
 js: typescript
+
+
+log:
+12-24 完成video mock数据 视频可以点击观看，可以发弹幕。
 
