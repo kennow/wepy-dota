@@ -50,5 +50,9 @@ export default class Index extends wepy.page {
   onReachBottom = () => {
     this.$broadcast('lower', '')
   }
+
+  onLoad = async() => {
+    await this.$parent.getUserInfo()
+  }
 }
 </script>

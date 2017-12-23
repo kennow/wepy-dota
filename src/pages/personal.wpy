@@ -1,24 +1,81 @@
 <style lang='scss'>
+  .person-center{
+    .info {
+      background-image:linear-gradient(-131deg, #3ca2e5 0%, #18c6a4 100%);
+    }
+    .weui-cells{
+      margin-top: 30rpx;
+      line-height:1;
+      font-size:16px;
+      .weui-cell{
+        .iconfont{
+          padding-right: 15rpx;
+          &.icon-zhanji{
+            color:#d81e06;
+          }
+          &.icon-pifu{
+            color:#0fe3cc;
+          }
+          &.icon-qianbao{
+            color:#d7454c;
+          }
+        }
+      }
+      
+    }
+    .weui-cell__ft_in-access{
+      color:#fff;
+    }
+  }
+  
 </style>
 
 <template>
-  <view class="weui-cells weui-cells_after-title">
-      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active"  @tap="goDetail({{per}})">
+  <view class='person-center'>
+    <view class="weui-panel weui-panel_access info">
+      <view class="weui-panel__bd">
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="{{userInfo.avatarUrl}}" />
+          </view>
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">{{userInfo.nickName}} {{userInfo.gender===1 ? '男' : '女'}}</view>
+            <view class="weui-media-box__desc">{{userInfo.city}}</view>
+          </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access">
+            <text class="iconfont icon-dengji"/>Lv 30
+          </view>
+        </navigator>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_after-title">
+      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
         <view class="weui-cell__hd">
-          <text class="iconfont icon-money"/>
+          <text class="iconfont icon-qianbao"/>
         </view>
-        <view class="weui-cell__bd">余额</view>
-        <view class="weui-cell__ft weui-cell__ft_in-access">99元</view>
+        <view class="weui-cell__bd">酒币</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <text class="iconfont icon-pifu"/>
+        </view>
+        <view class="weui-cell__bd">皮肤</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+      </navigator>
+      <navigator url="" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+        <view class="weui-cell__hd">
+          <text class="iconfont icon-zhanji"/>
+        </view>
+        <view class="weui-cell__bd">战绩</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access"></view>
       </navigator>
     </view>
+  </view>
 </template>
 
 <script lang="typescript">
 import wepy from 'wepy'
-
-interface IPerson {
-  name: string
-}
 
 export default class Personal extends wepy.page {
   config = {
@@ -26,15 +83,14 @@ export default class Personal extends wepy.page {
   }
 
   data = {
-    per: {
-      name: 'jack'
-    }
-  };
+    userInfo: {}
+  }
 
   methods = {
-    goDetail(person:IPerson):any {
-      console.log(person.name)
-    }
+  }
+
+  onLoad = () => {
+    this.userInfo = this.$parent.globalData.userInfo
   }
 }
 </script>

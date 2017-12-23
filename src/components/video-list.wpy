@@ -103,7 +103,7 @@ export default class VideoList extends wepy.component {
   methods = {
   };
 
-  async getvideos() {
+  getvideos = async() => {
     if (!this.isRefresh && !this.isLoad) {
       this.$root.showLoading()
     }
