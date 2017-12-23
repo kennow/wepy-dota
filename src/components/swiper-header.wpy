@@ -33,13 +33,13 @@ export default class SwiperHeader extends wepy.component {
   data = {
     images: [
       {
-        url: '../image/myheader.png'
+        url: '../image/sd.jpg'
       },
       {
-        url: '../image/myheader.png'
+        url: '../image/ss.jpg'
       },
       {
-        url: '../image/myheader.png'
+        url: '../image/yqi.jpg'
       }
     ]
   };

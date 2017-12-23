@@ -6,6 +6,10 @@
     .scroll-view{
       height: 100%;
     }
+    .weui-media-box__hd_in-appmsg{
+      width: 120px;
+      height: 70px;
+    }
   }
 </style>
 
@@ -20,14 +24,17 @@
           <view class="weui-panel__bd">
             <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                    <image class="weui-media-box__thumb" src="{{icon60}}" />
+                    <image class="weui-media-box__thumb" src="../image/title.jpeg" />
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-                    <view class="weui-media-box__title">{{item.name}}</view>
+                    <view class="weui-media-box__title">{{item.title}}</view>
+                    <view class="weui-media-box__desc">{{item.brief}}</view>
                     <view class="weui-media-box__info">
-                      <view class="weui-media-box__info__meta">文字来源</view>
-                      <view class="weui-media-box__info__meta">时间</view>
-                      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+                      <view class="weui-media-box__info__meta">{{item.name}}</view>
+                      <view class="weui-media-box__info__meta">{{item.video}}</view>
+                      <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">
+                        <text class="iconfont icon-bofang"/>{{item.watch}}
+                      </view>
                     </view>
                 </view>
             </navigator>
@@ -38,36 +45,56 @@
         <view class="weui-loading"></view>
         <view class="weui-loadmore__tips">正在加载</view>
       </view>
-      <!-- <view class="weui-loadmore weui-loadmore_line" hidden="{{!isLowed}}">
+      <view class="weui-loadmore weui-loadmore_line" hidden="{{!isLowed}}">
         <view class="weui-loadmore__tips weui-loadmore__tips_in-line">到底啦</view>
-      </view> -->
+      </view>
     </view>
   </view>
 </template>
 
-<script>
+<script lang="typescript">
 import wepy from 'wepy'
+import setting from '../common/setting'
+
+// interface IVideo {
+//   /**
+//    * 作者
+//    */
+//   name: string;
+//   /**
+//    * 标题
+//    */
+//   title: string;
+//   /**
+//    * 简介
+//    */
+//   brief: string;
+//   /**
+//    * 时间
+//    */
+//   time: string;
+//   /**
+//    * 点击量
+//    */
+//   watch: number;
+//   /**
+//    * 视频地址
+//    */
+//   videoUri: string;
+// }
 
 export default class VideoList extends wepy.component {
   data = {
-    videoList: [
-      { name: '1' },
-      { name: '2' },
-      { name: '3' },
-      { name: '4' },
-      { name: '4' },
-      { name: '4' },
-      { name: '4' },
-      { name: '4' },
-      { name: '4' },
-      { name: '4' },
-      { name: '4' },
-      { name: '4' },
-      { name: '4' },
-      { name: '4' }
-    ],
+    videoList: [],
+    queryInfo: {
+      pageIndex: 1,
+      pageSize: 5,
+      searchKey: '',
+      where: {}
+    },
     isRefresh: false,
     isLoad: false,
+    isLowed: false,
     timer: null
   };
 
@@ -76,7 +103,25 @@ export default class VideoList extends wepy.component {
   methods = {
   };
 
-  getDoctorList() {
+  async getvideos() {
+    if (!this.isRefresh && !this.isLoad) {
+      this.$root.showLoading()
+    }
+    const queryStr = JSON.stringify(this.queryInfo)
+    const ret = await wepy.request(
+      {
+        url: `${setting.apiUrl}/videoList?QueryInfo=${queryStr}`
+      }
+    )
+    if (ret.data.success) {
+      if (this.isRefresh) {
+      } else {
+        this.videoList = this.videoList.concat(ret.data.data.rows)
+        this.$root.cancelLoading()
+        this.queryInfo.pageIndex++
+        this.isLowed = (this.queryInfo.pageIndex > 3)
+      }
+    }
     this.isRefresh = false
     this.isLoad = false
     this.$apply()
@@ -89,17 +134,19 @@ export default class VideoList extends wepy.component {
       }
       this.isRefresh = true
       this.timer = setTimeout(() => {
-        this.getDoctorList()
+        this.getvideos()
       }, 1000)
     },
     lower() {
       if (this.timer) {
         clearTimeout(this.timer)
       }
-      this.isLoad = true
-      this.timer = setTimeout(() => {
-        this.getDoctorList()
-      }, 1000)
+      if (!this.isLowed) {
+        this.isLoad = true
+        this.timer = setTimeout(() => {
+          this.getvideos()
+        }, 1000)
+      }
     }
   };
 }

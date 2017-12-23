@@ -20,13 +20,19 @@ export default class extends wepy.app {
     },
     tabBar: {
       list: [{
+        iconPath: './image/home.png',
         pagePath: 'pages/index',
+        selectedIconPath: './image/home_active.png',
         text: '首页'
       }, {
+        iconPath: './image/me.png',
+        selectedIconPath: './image/me_active.png',
         pagePath: 'pages/personal',
         text: '我的'
       }],
-      selectedColor: '#1d4582'
+      color: '#8a99a3',
+      backgroundColor: '#080f17',
+      selectedColor: '#ffffff'
     }
   }
 
