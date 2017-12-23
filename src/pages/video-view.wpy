@@ -1,0 +1,134 @@
+<style lang='scss'>
+  .video-view{
+    .chat-list-view{
+      background:#f2f2f2;
+      .chat-list{
+        margin:20rpx 15rpx;
+        width: auto;
+        background-color: #fff;
+        border-radius: 4rpx;
+        padding: 10rpx 8rpx;
+        .title{
+          color:#0fb494;
+          padding-right: 6rpx;
+        }
+        .content{
+          color:#000;
+        }
+      }
+    }
+    .input-view{
+      padding-top: 8rpx;
+      input{
+        float: left;
+        border:1px solid #ddd;
+        border-radius: 4rpx;
+        margin-left: 8rpx;
+      }
+      button{
+        float: right;
+        margin-top: 0;
+        margin-right: 8rpx;
+      }
+    }
+  }
+</style>
+
+<template>
+  <view class="video-view">
+    <video id="myVideo" 
+      style="width:{{winWidth}}px"
+      src="{{videoUrl}}" 
+      enable-danmu="true"
+      danmu-btn 
+      controls
+      danmu-list="{{danmuList}}"
+      autoplay="true"
+    >
+    </video>
+    <view style="height:{{winHeight-225-50 - 20}}px;background:#f2f2f2">
+      <scroll-view class="chat-list-view">
+        <repeat for="{{showdanmuList}}" key="index" index="index" item="item">
+          <view class="chat-list">
+            <text class="title">{{item.name}}:</text>
+            <text class="content">{{item.text}}</text>
+          </view>
+        </repeat>
+      </scroll-view>
+    </view>
+    <view style="height:50px" class="input-view">
+      <input placeholder="最多20字符" bindinput="bindKeyInput" value="{{inputValue}}" maxlength="20"/>
+      <button class="weui-btn mini-btn" type="primary" size="mini" @tap="bindSendDanmu()">发送</button>
+    </view>
+  </view>
+</template>
+
+<script lang="typescript">
+import wepy from 'wepy'
+
+export default class VideoView extends wepy.page {
+  config = {
+  }
+
+  data = {
+    winWidth: 0,
+    winHeight: 0,
+    videoUrl: 'http://wxsnsdy.tc.qq.com/105/20210/snsdyvideodownload?filekey=30280201010421301f0201690402534804102ca905ce620b1241b726bc41dcff44e00204012882540400&bizid=1023&hy=SH&fileparam=302c020101042530230204136ffd93020457e3c4ff02024ef202031e8d7f02030f42400204045a320a0201000400',
+    danmuList: [
+      {
+        text: '2333',
+        color: '#ff0000',
+        name: '没名字起了'
+      },
+      {
+        text: '66666',
+        color: '#ff00ff',
+        name: '大酒神'
+      }
+    ],
+    showdanmuList: [],
+    inputValue: '',
+    color: ''
+  }
+
+  getRandomColor = () => {
+    let rgb = []
+    for (let i = 0; i < 3; ++i) {
+      let color = Math.floor(Math.random() * 256).toString(16)
+      color = color.length === 1 ? '0' + color : color
+      rgb.push(color)
+    }
+    return '#' + rgb.join('')
+  }
+
+  methods = {
+    bindKeyInput(e) {
+      this.inputValue = e.detail.value
+    },
+    bindSendDanmu() {
+      const sendObj = {
+        text: this.inputValue,
+        color: this.getRandomColor(),
+        name: this.$parent.globalData.userInfo.nickName
+      }
+      this.showdanmuList.push(sendObj)
+      this.videoContext.sendDanmu(sendObj)
+      this.inputValue = ''
+    }
+  }
+
+  onReady = () => {
+    this.videoContext = wepy.createVideoContext('myVideo')
+  }
+
+  onLoad = async(p) => {
+    this.videoUrl = this.$parent.videoInfo.videoUri
+    const res = await wepy.getSystemInfoSync()
+    if (res) {
+      this.winWidth = res.windowWidth
+      this.winHeight = res.windowHeight
+    }
+    this.showdanmuList = this.danmuList.concat([])
+  }
+}
+</script>

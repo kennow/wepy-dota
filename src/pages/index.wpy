@@ -54,5 +54,9 @@ export default class Index extends wepy.page {
   onLoad = async() => {
     await this.$parent.getUserInfo()
   }
+
+  getVideoInfo = (info) => {
+    this.$parent.getVideoInfo(info)
+  }
 }
 </script>

@@ -3,12 +3,14 @@
     box-sizing: border-box;
     padding-top: 300rpx;
     overflow-y: auto;
-    .scroll-view{
-      height: 100%;
-    }
     .weui-media-box__hd_in-appmsg{
       width: 120px;
       height: 70px;
+    }
+    .weui-media-box_appmsg{
+      &:active{
+        background-color: #ddd;
+      }
     }
   }
 </style>
@@ -22,9 +24,12 @@
       <repeat for="{{videoList}}" key="index" index="index" item="item">
         <view class="weui-panel weui-panel_access">
           <view class="weui-panel__bd">
-            <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+            <view
+              class="weui-media-box weui-media-box_appmsg"
+              @tap="saveVideoInfo({{item}})"
+            >
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                    <image class="weui-media-box__thumb" src="../image/title.jpeg" />
+                    <image class="weui-media-box__thumb" src="{{item.imageUri}}" />
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
                     <view class="weui-media-box__title">{{item.title}}</view>
@@ -37,7 +42,7 @@
                       </view>
                     </view>
                 </view>
-            </navigator>
+            </view>
           </view>
         </view>
       </repeat>
@@ -101,6 +106,10 @@ export default class VideoList extends wepy.component {
   components = {};
 
   methods = {
+    saveVideoInfo (info) {
+      this.$parent.getVideoInfo(info)
+      this.goDetail(info.id)
+    }
   };
 
   getvideos = async() => {
@@ -125,6 +134,10 @@ export default class VideoList extends wepy.component {
     this.isRefresh = false
     this.isLoad = false
     this.$apply()
+  }
+
+  goDetail = (id) => {
+    wepy.navigateTo({url: `../pages/video-view?videoUrl=${id}`})
   }
 
   events = {

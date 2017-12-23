@@ -11,7 +11,8 @@ export default class extends wepy.app {
   config = {
     pages: [
       'pages/index',
-      'pages/personal'
+      'pages/personal',
+      'pages/video-view'
     ],
     window: {
       backgroundTextStyle: 'light',
@@ -37,7 +38,8 @@ export default class extends wepy.app {
   }
 
   globalData = {
-    userInfo: null
+    userInfo: null,
+    videoInfo: null
   }
 
   constructor () {
@@ -71,6 +73,10 @@ export default class extends wepy.app {
     let res = await wepy.getUserInfo()
     this.globalData.userInfo = res.userInfo
     return res.userInfo
+  }
+
+  getVideoInfo(info) {
+    this.videoInfo = info
   }
 }
 </script>
