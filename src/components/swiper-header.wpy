@@ -33,13 +33,16 @@ export default class SwiperHeader extends wepy.component {
   data = {
     images: [
       {
-        url: '../image/sd.jpg'
+        url: 'http://www.09game.com/uploadfile/2017/1222/20171222051643515.jpg'
       },
       {
-        url: '../image/ss.jpg'
+        url: 'http://www.09game.com/uploadfile/2017/1221/20171221051954535.jpg'
       },
       {
-        url: '../image/yqi.jpg'
+        url: 'http://www.09game.com/uploadfile/2017/1220/20171220025756756.jpg'
+      },
+      {
+        url: 'http://www.09game.com/uploadfile/2017/1219/20171219052712839.jpg'
       }
     ]
   };

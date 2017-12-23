@@ -12,7 +12,8 @@ export default class extends wepy.app {
     pages: [
       'pages/index',
       'pages/personal',
-      'pages/video-view'
+      'pages/video-view',
+      'pages/record'
     ],
     window: {
       backgroundTextStyle: 'light',
