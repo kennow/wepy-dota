@@ -15,3 +15,6 @@ icon: iconfont
 
 
 css: scss
+
+js: typescript
+
