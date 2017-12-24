@@ -3,6 +3,12 @@
     .canvas{
       height: 220px;
     }
+    .weui-grid{
+      background-color: #091219;
+      .weui-grid__label{
+        color:#828282;
+      }
+    }
   }
   
 </style>
@@ -13,28 +19,28 @@
     <view class="page__bd">
       <view class="weui-grids">
         <navigator url="" class="weui-grid" hover-class="weui-grid_active">
-            <vi class="weui-grid__icon" src="" />
-            <view class="weui-grid__label">Grid</view>
+            <image class="weui-grid__icon" src="../image/mvp.jpeg" />
+            <view class="weui-grid__label">15</view>
         </navigator>
         <navigator url="" class="weui-grid" hover-class="weui-grid_active">
-            <image class="weui-grid__icon" src="" />
-            <view class="weui-grid__label">Grid</view>
+            <image class="weui-grid__icon" src="../image/kill.jpeg" />
+            <view class="weui-grid__label">16</view>
         </navigator>
         <navigator url="" class="weui-grid" hover-class="weui-grid_active">
-            <image class="weui-grid__icon" src="" />
-            <view class="weui-grid__label">Grid</view>
+            <image class="weui-grid__icon" src="../image/fu.jpeg" />
+            <view class="weui-grid__label">18</view>
         </navigator>
         <navigator url="" class="weui-grid" hover-class="weui-grid_active">
-            <image class="weui-grid__icon" src="" />
-            <view class="weui-grid__label">Grid</view>
+            <image class="weui-grid__icon" src="../image/lin.jpeg" />
+            <view class="weui-grid__label">22</view>
         </navigator>
         <navigator url="" class="weui-grid" hover-class="weui-grid_active">
-            <image class="weui-grid__icon" src="" />
-            <view class="weui-grid__label">Grid</view>
+            <image class="weui-grid__icon" src="../image/tang.jpeg" />
+            <view class="weui-grid__label">1</view>
         </navigator>
         <navigator url="" class="weui-grid" hover-class="weui-grid_active">
-            <image class="weui-grid__icon" src="" />
-            <view class="weui-grid__label">Grid</view>
+            <image class="weui-grid__icon" src="../image/jiang.jpeg" />
+            <view class="weui-grid__label">0</view>
         </navigator>
       </view>
     </view>

@@ -32,9 +32,8 @@ export default class extends wepy.app {
         pagePath: 'pages/personal',
         text: '我的'
       }],
-      color: '#8a99a3',
-      backgroundColor: '#080f17',
-      selectedColor: '#ffffff'
+      color: '#dddddd',
+      selectedColor: '#080f17'
     }
   }
 
