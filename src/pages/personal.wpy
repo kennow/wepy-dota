@@ -1,8 +1,5 @@
 <style lang='scss'>
   .person-center{
-    .info {
-      background-image:linear-gradient(-131deg, #3ca2e5 0%, #18c6a4 100%);
-    }
     .weui-cells{
       margin-top: 30rpx;
       line-height:1;
@@ -24,7 +21,10 @@
       
     }
     .weui-cell__ft_in-access{
-      color:#fff;
+      color:#999999
+    }
+    .weui-media-box__desc{
+      color:inherit;
     }
   }
   

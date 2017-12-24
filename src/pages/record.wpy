@@ -90,5 +90,22 @@ export default class Record extends wepy.page {
       }
     })
   }
+
+  onShareAppMessage = (res) => {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '我的战绩',
+      path: 'pages/record',
+      success(res) {
+        console.log('success')
+      },
+      fail(res) {
+        console.log(res)
+      }
+    }
+  }
 }
 </script>
