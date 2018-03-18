@@ -21,4 +21,6 @@ js: typescript
 
 log:
 12-24 完成video mock数据 视频可以点击观看，可以发弹幕。
+3-18 test new pc
+
 
